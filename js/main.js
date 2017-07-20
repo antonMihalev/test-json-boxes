@@ -4,6 +4,8 @@ var data = jQuery.getJSON("js/data.json");
 $.getJSON( "js/data.json", function( data ) {
       var items = [];
       var parent = document.getElementsByTagName('BODY')[0];
+      var rectangle = document.querySelector('rectangle');
+      
       
           (function parseObj(data){
               console.log(data);
@@ -29,6 +31,8 @@ $.getJSON( "js/data.json", function( data ) {
           		var textNode = document.createTextNode(text);
           		newDiv.appendChild(textNode);
           		parent.appendChild(newDiv);
+          		
+          		newDiv.setAttribute('data-brd-width', items[i].order);//---data-attr
 
           		//------------------ORDER as BORDER START
           		newDiv.style.borderWidth = items[i].order+'px';
@@ -37,6 +41,7 @@ $.getJSON( "js/data.json", function( data ) {
           		//------------------ODD or EVEN as BORDER or BackGround START
           		if(items[i].order % 2){
           			newDiv.style.backgroundColor = items[i].color;
+          			newDiv.setAttribute('data-color', items[i].color);//---data-attr
           		}else {
           			newDiv.style.borderColor = items[i].color;
           			newDiv.setAttribute('data-color', items[i].color);//---data-attr
@@ -47,7 +52,7 @@ $.getJSON( "js/data.json", function( data ) {
 
           		if(((i+1) % 2) === 0) {newDiv.classList.add("box_shadow")} //Odd has shadow
 
-          		console.log(items[i]);
+          		// console.log(items[i]);
           	}
 
           })(items);
@@ -68,7 +73,7 @@ $.getJSON( "js/data.json", function( data ) {
 			  		}
 				    
 				    if(event.target.previousElementSibling.classList != ''){
-				    	event.target.previousElementSibling.classList.add('bg_yellow');
+				    	event.target.previousElementSibling.style.backgroundColor = 'yellow';
 				    }
 				    if(event.target.nextElementSibling.classList.contains('rectangle')){
 				    	event.target.nextElementSibling.classList.add('opacity_half');
@@ -76,18 +81,23 @@ $.getJSON( "js/data.json", function( data ) {
 				    	
 			  }
 			  if (event.type == 'mouseout') {
-				    event.target.classList.remove('rotating');		 
-				    event.target.previousElementSibling.classList.remove('bg_yellow');
+				    event.target.classList.remove('rotating');
+				    if(event.target.previousElementSibling.getAttribute('data-brd-width') % 2){
+				    	event.target.previousElementSibling.style.backgroundColor = event.target.previousElementSibling.getAttribute('data-color');
+				    }else {
+				    	event.target.previousElementSibling.style.borderColor = event.target.previousElementSibling.getAttribute('data-color');
+				    	event.target.previousElementSibling.style.backgroundColor = 'initial';
+				    } 
+			
 				    event.target.nextElementSibling.classList.remove('opacity_half');
-			  }
+				}		
+
 				  //---------Click => border-x-3. Second Click => return to initial view
 			  if (event.type == 'click') {
-				    event.target.style.borderWidth = 10+'px';
-				    // alert(event.target);	 
+				    event.target.style.borderWidth = (event.target.getAttribute('data-brd-width')*3)+'px'; 
 			  }
 			  if (event.type == 'dblclick') {
-				    event.target.style.borderWidth = '5px';
-				    // alert(even.target);	 
+				    event.target.style.borderWidth = event.target.getAttribute('data-brd-width')+'px'; 
 			  }
 			}
 	        //------------------HOVER EFFECT END
