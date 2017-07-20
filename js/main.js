@@ -72,7 +72,7 @@ $.getJSON( "js/data.json", function( data ) {
 			  			event.target.classList.add('rotating');
 			  		}
 				    
-				    if(event.target.previousElementSibling.classList != ''){
+				    if(event.target.previousElementSibling.classList != '' && !event.target.hasAttribute('data-btn')){
 				    	event.target.previousElementSibling.style.backgroundColor = 'yellow';
 				    }
 				    if(event.target.nextElementSibling.classList.contains('rectangle')){
@@ -105,6 +105,7 @@ $.getJSON( "js/data.json", function( data ) {
 	        //------------------Button for ordering START
 	        var buttonToOrdering = document.createElement('button');
 	        buttonToOrdering.className = ('button_styles');
+	        buttonToOrdering.setAttribute('data-btn', 'sort-button');
 	        var buttonText = 'Sort';
 	        var buttonTextNode = document.createTextNode(buttonText);
 	        buttonToOrdering.appendChild(buttonTextNode);
