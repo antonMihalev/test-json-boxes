@@ -1,0 +1,66 @@
+*{
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+.rectangle_container{
+	clear: both;
+	background: pink;
+	-webkit-transition: all 1s;
+	   -moz-transition: all 1s;
+	    -ms-transition: all 1s;
+	     -o-transition: all 1s;
+	        transition: all 1s;
+	
+}
+
+.rectangle{
+	float: left;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	line-height: 100px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-style: solid;
+	-webkit-transition: all 1s;
+	   -moz-transition: all 1s;
+	    -ms-transition: all 1s;
+	     -o-transition: all 1s;
+	        transition: all 1s;
+}
+
+
+
+.clearfix{
+	clear: left;
+}
+
+.box_shadow{
+	-webkit-box-shadow: 2px 2px 2px aqua;
+	        box-shadow: 2px 2px 2px aqua;
+}
+
+.opacity_half{
+	opacity: 0.5;
+}
+
+.rotating{
+	-webkit-transform: rotate(360deg);
+	   -moz-transform: rotate(360deg);
+	    -ms-transform: rotate(360deg);
+	     -o-transform: rotate(360deg);
+	        transform: rotate(360deg);
+	-webkit-transition: all 1s;
+	   -moz-transition: all 1s;
+	    -ms-transition: all 1s;
+	     -o-transition: all 1s;
+	        transition: all 1s;
+	cursor: pointer;
+}
+
+.bg_yellow{
+	background-color: yellow;
+	border: none;
+}
