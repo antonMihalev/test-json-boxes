@@ -56,7 +56,14 @@ $.getJSON( "js/data.json", function( data ) {
 	          	}
 
 	          }
+
 	          addRectangle(items);
+	          
+	          function rmRectangle(df){ //Удаляет созданные addRectangle
+	          	while (parent.firstChild && parent.firstChild != '[object HTMLButtonElement]') {
+    				parent.removeChild(parent.firstChild);
+				}
+	          }
 
           //------------------HOVER EFFECT current-Rotate, prev-Yellow, next-Opacity 0.5
           	document.body.onmouseover = document.body.onmouseout = document.body.onclick = document.body.ondblclick= handler;
@@ -83,7 +90,7 @@ $.getJSON( "js/data.json", function( data ) {
 			  }
 			  if (event.type == 'mouseout') {
 				    event.target.classList.remove('rotating');
-				    if(event.target.previousElementSibling.getAttribute('data-brd-width') % 2){
+				    if(event.target.previousElementSibling.hasAttribute('data-brd-width') % 2){
 				    	event.target.previousElementSibling.style.backgroundColor = event.target.previousElementSibling.getAttribute('data-color');
 				    }else {
 				    	event.target.previousElementSibling.style.borderColor = event.target.previousElementSibling.getAttribute('data-color');
@@ -100,14 +107,20 @@ $.getJSON( "js/data.json", function( data ) {
 				    event.target.style.borderWidth = (event.target.getAttribute('data-brd-width')*3)+'px';
 			  	}
 			  	if( event.target == '[object HTMLButtonElement]' ){
+				    rmRectangle(items);
 				    addRectangle(sortedItems);
+
 			  	}
 			  }
 			  if (event.type == 'dblclick') {
+			  		if(event.target == '[object HTMLButtonElement]'){
+			  			event.target.style.backgroundColor = 'pink';
+			  		}
 				    event.target.style.borderWidth = event.target.getAttribute('data-brd-width')+'px'; 
-			  		/*if( event.target == '[object HTMLButtonElement]' ){
+			  		if( event.target == '[object HTMLButtonElement]' ){
+				    	rmRectangle(sortedItems);
 				    	addRectangle(items);
-			  		}*/
+			  		}
 			  }
 
 			}
